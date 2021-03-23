@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>SINGLE DEGREE OF FREEDOM SYSTEMS (SDOF) - VIBRATION CALCULATOR</h1>
+    <p >The Single Degree of Freedom (SDOF) Vibration Calculator to calculate mass-spring-damper natural frequency, circular frequency, damping factor, Q factor, critical damping, damped natural frequency and transmissibility for a harmonic input.</p>
+    <p style="width:80%">Mechanical vibrations are fluctuations of a mechanical or a structural system about an equilibrium position. Mechanical vibrations are initiated when an inertia element is displaced from its equilibrium position due to energy input to the system through an external source. When work is done on SDOF system and mass is displaced from its equilibrium position, potential energy is developed in the spring.</p>
+    <p style="width:80%"> A restoring force or moment pulls the element back toward equilibrium and this cause conversion of potential energy to kinetic energy. In the absence of nonconservative forces, this conversion of energy is continuous, causing the mass to oscillate about its equilibrium position.  </p>
+    <p style="width:80%">All structures have many degrees of freedom, which means they have more than one independent direction in which to vibrate and many masses that can vibrate. Single degree of freedom systems are the simplest systems to study basics of mechanical vibrations. SDOF systems are often used as a very crude approximation for a generally much more complex system. The other use of SDOF system is to describe complex systems motion with collections of several SDOF systems.</p>
+    <h2>Single Degree of Freedom Vibration Calculator:</h2>
+    <table class="table" style="width:80%">
+        <tr>
+            <th colspan="3">INPUT PARAMETERS</th>
+        </tr>
+        <tr>
+            <th>Parameter</th>
+            <th colspan="2">Value</th>
+        </tr>
+        <tr>
+            <td>Mass [m]</td>
+            <td>    
+                <input type="number" id="mass" name="mass">
+            </td>
+            <td>
+                <select id="m_unit" name="m_unit">
+                    <option value="kg">kg</option>
+                    <option value="g">g</option>
+                    <option value="lb">lb</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+          <td>Spring rate (Stiffness) [k]</td>
+          <td><input type="number" id="k" name="k"></td>
+          <td >
+            <select id="k_unit" name="k_unit">
+                <option value="N/m">N/m</option>
+                <option value="N/mm">N/mm</option>
+                <option value="lbf/in">lbf/in</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Damping raito (coefficient) [ζ]</td>
+          <td colspan="2"><input type="number" id="dc" name="dc"></td>
+          
+        </tr>
+        <tr>
+            <td >Free/Forced vibration</td>
+            <td colspan="3">
+            <select id="vib" name="vib">
+                <option value="free">free</option>
+                <option value="forced">forced</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Harmonic input frequency [Ω]</td>
+            <td><input type="number" id="Omega" name="Omega"></td>
+            <td>Hz</td>
+        </tr>
+        <tr>
+            <th colspan="3"> <button onclick = "myfunction()">Calculate</button></th>
+        </tr>
+
+      </table>
+      
+
+      <div>
+          <img src="formula Table.png" alt="Formula Table" width="80%">
+      </div>
+
+
+
+        <table class="table" style="width:80%" id="table2">   
+        <tr>
+            <th colspan="3">RESULTS</th>
+        </tr>
+        <tr>
+            <th>Parameter</th>
+            <th colspan="2">Value</th>
+        </tr>
+        <tr>
+            <td>Cicular frequency [wn]</td>
+            <td>0 </td>
+            <td>rad/s</td>
+        </tr>
+        <tr>
+            <td>Natural frequency [fn]</td>
+            <td>0 </td>
+            <td>Hz</td>
+        </tr>
+        <tr>
+            <td>Period of oscilattion [T]</td>
+            <td>0 </td>
+            <td>s</td>
+        </tr>
+        <tr>
+            <td>Critical damping [cc]</td>
+            <td>0 </td>
+            <td>---</td>
+        </tr>
+        <tr>
+            <td>Damping factor [c]</td>
+            <td>0 </td>
+            <td>---</td>
+        </tr>
+        <tr>
+            <td>Damped natural angular frequency [wd]</td>
+            <td>0 </td>
+            <td>rad/s</td>
+        </tr>
+        <tr>
+            <td>Damped natural frequency [fd]</td>
+            <td>0 </td>
+            <td>Hz</td>
+        </tr>
+        <tr>
+            <td>Quality factor [Q]</td>
+            <td>0 </td>
+            <td>---</td>
+        </tr>
+        <tr>
+            <td>Transmissiblity [TR]</td>
+            <td>--- </td>
+            <td>---</td>
+        </tr>
+
+
+    
+    </table>
+
+    <div id='myDiv'><!-- Plotly chart will be drawn inside this DIV --></div>
+
+
+
+
+<h2 id ="h2">Definitions:</h2>
+<p><b>Critical damping:</b> The minimum amount of viscous damping that results in a displaced system returning to its original position without oscillation</p>
+<p><b>Damped natural frequency:</b> In the presence of damping, the frequency at which the system vibrates when disturbed. Damped natural frequency is less than undamped natural frequency.</p>
+<p><b>Damping ratio:</b> The ratio of actual damping to critical damping. It is a dimensionless measure describing how oscillations in a system decay after a disturbance.</p>
+<p><b>Forced vibrations:</b> Oscillations about a system's equilibrium position in the presence of an external excitation.</p>
+<p><b>Free  vibrations:</b> Oscillations about a system's equilibrium position in the absence of an external excitation.</p>
+<p><b>Natural frequency:</b> The frequency at which a system vibrates when set in free vibration.</p>
+<p><b>Undamped natural frequency:</b> In the absence of damping, the frequency at which the system vibrates when disturbed.</p>
+<p><b>Period of Oscillation:</b> The time in seconds required for one cycle.</p>
+<p><b>Transmissiblity:</b> The ratio of output amplitude to input amplitude at same frequency. Following 2 conditions have same transmissiblity value.</p>
+
+
+<canvas id="myChart" width="400" height="400"></canvas>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script  src="index.js"></script>  
+</body>
+<script src="https://code.jscharting.com/2.9.0/jscharting.js"></script>
+</html>
